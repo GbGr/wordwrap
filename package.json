@@ -1,5 +1,5 @@
 {
-  "name": "wordwrap",
+  "name": "minimum-raggedness-wordwrap",
   "version": "0.0.1",
   "description": "Minimum raggedness wordwrap algorithm",
   "keywords": [

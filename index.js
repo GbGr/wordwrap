@@ -1,22 +1,22 @@
-module.exports = function (str, constaint) {
+module.exports = function (str, constraint) {
   let words = str.split(/\s/);
   let results = [];
-  let ruggednesses = [];
+  let raggedness = [];
   let len = words.length;
   for (let i = 0; i <= len; i++) {
     results.push([]);
-    ruggednesses.push([]);
+    raggedness.push([]);
   }
   (function calcRuggedness(start, end) {
-    if (typeof ruggednesses[start][end] !== 'undefined') return ruggednesses[start][end];
+    if (typeof raggedness[start][end] !== 'undefined') return raggedness[start][end];
     if (start === end) return 0;
 
     let wordsSegment = words.slice(start, end);
     let lineLength = wordsSegment.reduce(((res, word) => (res + word.length + 1)), -1);
 
-    if (lineLength <= constaint || end - start === 1) {
+    if (lineLength <= constraint || end - start === 1) {
       results[start][end] = wordsSegment.join(' ');
-      return ruggednesses[start][end] = Math.pow(constaint - lineLength, 2);
+      return raggedness[start][end] = Math.pow(constraint - lineLength, 2);
     }
 
     let record = Infinity;
@@ -32,7 +32,7 @@ module.exports = function (str, constaint) {
 
     // TODO: Необходимо хранить индекс слова перед которым необходимо вставить разрыв строки
     results[start][end] = results[start][breakIdx] + '\n' + results[breakIdx][end];
-    return ruggednesses[start][end] = record;
+    return raggedness[start][end] = record;
   })(0, words.length);
   return results[0][words.length];
 };
